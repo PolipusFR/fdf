@@ -33,7 +33,6 @@ int		ft_wdcounter(char const *str, char c)
 
 int get_height(char *file_name)
 {
-    char	*line;
 	int		fd;
 	int		height;
 
@@ -90,6 +89,8 @@ void    read_file(char *file_name, t_fdf *data)
 	data->width = get_width(file_name);
 
 	data->z_matrix = malloc(sizeof(int*) * (data->height + 1));
+	if (data->z_matrix == NULL)
+		return ;
 	i = 0;
 	while (i <= data->height)
 		data->z_matrix[i++] = malloc(sizeof(int) * (data->width + 1));
