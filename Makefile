@@ -9,7 +9,7 @@
 
 NAME        := fdf
 CC        := gcc
-FLAGS    := -Wall -Wextra -Werror 
+FLAGS    := -Wall -Werror -Wextra
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
@@ -69,6 +69,7 @@ SRCS        :=      libft/ft_atoi.c \
                           libft/get_next_line_utils.c \
                           src/main.c \
                           src/read_file.c \
+                          src/draw.c \
                           
 OBJS        := $(SRCS:.c=.o)
 

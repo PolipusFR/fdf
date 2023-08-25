@@ -110,27 +110,38 @@ int main(int ac, char **av)
 
     if (ac != 2)
     {
-        printf("Error. Usage : ./a.out map\n");
+        printf("Error. Usage : ./fdf map\n");
         exit(1);
     }
     data = malloc(sizeof(t_fdf));
     if (!data)
         return(0);
     read_file (av[1], data);
-
-    int i;
-    int j;
-
-    i = 0;
-    while (i < data->height)
+	data->mlx_ptr = mlx_init();
+    if (data->mlx_ptr == NULL)
     {
-        j = 0;
-        while (j < data->width)
-        {
-            ft_printf("%d ", data->z_matrix[i][j]);
-            j++;
-        }
-        ft_printf("\n");
-        i++;
+        return (1);
     }
+	data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000, "FDF");
+    data->zoom = 20;
+    //line_algo(10, 10, 600, 300, data);
+    draw(data);
+	mlx_key_hook(data->win_ptr, NULL, NULL);
+	mlx_loop(data->mlx_ptr);
+
+    // int i;
+    // int j;
+    //
+    // i = 0;
+    // while (i < data->height)
+    // {
+    //     j = 0;
+    //     while (j < data->width)
+    //     {
+    //         printf("%3d", data->z_matrix[i][j]);
+    //         j++;
+    //     }
+    //     printf("\n");
+    //     i++;
+    // }
 }
