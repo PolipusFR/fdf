@@ -6,11 +6,13 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 12:18:18 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/08/25 13:25:50 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:13:30 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../libft/libft.h"
+#include "../libft/ft_printf/ft_printf.h"
 
 static float	abs_val(float a)
 {
@@ -49,36 +51,45 @@ void    line_algo(float x, float y, float x1, float y1, t_fdf *data)
 	y *= data->zoom;
 	x1 *= data->zoom;
 	y1 *= data->zoom;
-	
+	z *= data->move_z;
+	z1 *= data->move_z;
 	//-------------Color-------------//
-	data->color = (z || z1) ? 0xe80c0c : 0xffffff;
+	if (z || z1)
+		data->color = 0xe80c0c;
+	else
+		data->color = 0xffffff;
 	//------------- 3D  -------------//
 	perspective(&x, &y, z);
 	perspective(&x1, &y1, z1);
 	//-------------Shift-------------//
-	x += 150;
-	y += 150;
-	x1 += 150;
-	y1 += 150;
+	x += data->move_x;
+	x1 += data->move_x;
+	y += data->move_y;
+	y1 += data->move_y;
 	
 	x_step = x1 - x;
 	y_step = y1 - y;
 	max = max_step (abs_val(x_step), abs_val(y_step));
 	x_step /= max;
 	y_step /= max;
+
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
+		my_mlx_pixel_put(data, x, y, data->color);
 		x += x_step;
 		y += y_step;
 	}
 }
 
+
 void	draw(t_fdf *data)
 {
 	int	x;
 	int	y;
-	
+
+	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	data->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	y = 0;
 	while (y < data->height)
 	{
@@ -93,4 +104,6 @@ void	draw(t_fdf *data)
 		}
 		y++;
 	}
+	
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }

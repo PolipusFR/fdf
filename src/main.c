@@ -44,18 +44,18 @@
 // 	--------------
 // 	3. function which draws lines beetwen every dot
 // 		- examle:
-// 				0->		0->		0->		0
+// 				0.		0.		0.		0
 // 				|		|		|		|
 // 				
-// 				0->		10->            10->            0
+// 				0.		10.            10.            0
 // 				|		|		|		|
 // 				
-// 				0->		10->            10->            0
+// 				0.		10.            10.            0
 // 				|		|		|		|
 // 				
-// 				0->		0->		0->		0
-// 			'->' and '|'are lines between dots 
-// 			every dot has two lines (right and down):	0->
+// 				0.		0.		0.		0
+// 			'.' and '|'are lines between dots 
+// 			every dot has two lines (right and down):	0.
 //                                                                       |
 // 	----------------
 // 	4. adding 3D
@@ -104,11 +104,52 @@
 // 	frameworks:
 // 		-framework OpenGL -framework AppKit
 
+int		deal_key(int key, t_fdf *data)
+{
+    ft_printf("%d\n", key);
+	if (key == 65362)
+		data->move_y += 20;
+	if (key == 65361)
+		data->move_x += 20;
+	if (key == 65364)
+		data->move_y -= 20;
+	if (key == 65363)
+		data->move_x -= 20;
+	if (key == 65451)
+		data->zoom += 1;
+	if (key == 65453)
+		data->zoom -= 1;
+	if (key == 106)
+		data->move_z -= 1;
+	if (key == 107)
+		data->move_z += 1;
+    if (key == 65307)
+	{
+        exit (1);
+	}
+	draw(data);
+    return (0);
+}
+
+void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
+	{
+		data->addr = mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel, &data->line_length,
+									&data->endian);
+		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+		*(unsigned int*)dst = color;
+	}
+}
+
 int main(int ac, char **av)
 {
-    t_fdf   *data;
+	t_fdf	*data;
 
-    if (ac != 2)
+	
+	if (ac != 2)
     {
         printf("Error. Usage : ./fdf map\n");
         exit(1);
@@ -117,31 +158,15 @@ int main(int ac, char **av)
     if (!data)
         return(0);
     read_file (av[1], data);
-	data->mlx_ptr = mlx_init();
-    if (data->mlx_ptr == NULL)
-    {
-        return (1);
-    }
-	data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000, "FDF");
-    data->zoom = 20;
-    //line_algo(10, 10, 600, 300, data);
-    draw(data);
-	mlx_key_hook(data->win_ptr, NULL, NULL);
-	mlx_loop(data->mlx_ptr);
 
-    // int i;
-    // int j;
-    //
-    // i = 0;
-    // while (i < data->height)
-    // {
-    //     j = 0;
-    //     while (j < data->width)
-    //     {
-    //         printf("%3d", data->z_matrix[i][j]);
-    //         j++;
-    //     }
-    //     printf("\n");
-    //     i++;
-    // }
+	data->mlx_ptr = mlx_init();
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, av[1]);
+	data->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->addr = mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel, &data->line_length,
+								&data->endian);
+	data->zoom = 20;
+	data->move_z = 1;
+	draw(data);
+	mlx_key_hook(data->win_ptr, deal_key, data);
+	mlx_loop(data->mlx_ptr);
 }
