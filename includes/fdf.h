@@ -17,6 +17,18 @@
 # include "fcntl.h"
 # include <math.h>
 
+# define WIDTH 1920
+# define HEIGHT 1080
+
+typedef struct	s_data 
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
 typedef struct s_fdf
 {
 	int		width;
@@ -24,7 +36,16 @@ typedef struct s_fdf
 	int		**z_matrix;
 	int		zoom;
 	int		color;
+	int		move_x;
+	int		move_y;
+	int		move_z;
 
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+
+	void	*img_ptr;
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_fdf;
@@ -32,5 +53,6 @@ typedef struct s_fdf
 void    read_file(char *file_name, t_fdf *data);
 void    line_algo(float x, float y, float x1, float y1, t_fdf *data);
 void	draw(t_fdf *data);
+void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 
 #endif
