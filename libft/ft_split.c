@@ -6,7 +6,7 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:26:09 by lsabatie          #+#    #+#             */
-/*   Updated: 2022/12/09 15:14:20 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:22:14 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ char	**ft_split(char const *s, char c)
 		if (!res[i - 1])
 			return ((void *)ft_free(res));
 	}
-	res[i] = 0;
+	res[i] = '\0';
 	return (res);
 }

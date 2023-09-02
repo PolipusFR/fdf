@@ -6,7 +6,7 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:48:37 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/07/20 03:14:07 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:42:41 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*gnl_strjoin(char *s1, char *s2)
 	str = malloc(sizeof(char) * (len_s1 + len_s2 + 1));
 	if (!str)
 	{
-		free(s1);
 		return (NULL);
 	}
 	i = -1;
@@ -34,7 +33,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 		str[i] = s1[i];
 	while (j < len_s2)
 		str[i++] = s2[j++];
-	str[len_s1 + len_s2] = 0;
+	str[len_s1 + len_s2] = '\0';
 	free(s1);
 	return (str);
 }

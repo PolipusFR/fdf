@@ -6,7 +6,7 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 12:18:18 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/08/29 21:13:30 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:31:16 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void    line_algo(float x, float y, float x1, float y1, t_fdf *data)
 	max = max_step (abs_val(x_step), abs_val(y_step));
 	x_step /= max;
 	y_step /= max;
-
 	while ((int)(x - x1) || (int)(y - y1))
 	{
 		my_mlx_pixel_put(data, x, y, data->color);
@@ -104,6 +103,5 @@ void	draw(t_fdf *data)
 		}
 		y++;
 	}
-	
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
