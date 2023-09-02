@@ -55,6 +55,34 @@ void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color)
 	}
 }
 
+// int main(int ac, char **av)
+// {
+// 	t_fdf	*data;
+// 	int		i;
+// 	char	*line;
+
+// 	if (ac != 2)
+//     {
+//         printf("Error. Usage : ./fdf map\n");
+//         exit(1);
+//     }
+// 	data = malloc(sizeof(t_fdf));
+//     if (!data)
+// 	{
+//     	return(0);
+// 	}
+// 	int fd = open(av[1], O_RDONLY);
+// 	i = 0;
+// 	data->height = get_height(av[1]);
+//     while (i < data->height)
+// 	{
+//         line = get_next_line(fd);
+// 		ft_printf("%s\n", line);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
 int main(int ac, char **av)
 {
 	t_fdf	*data;

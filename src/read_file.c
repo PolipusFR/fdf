@@ -83,7 +83,7 @@ void	fill_matrix(int *z_line, char *line)
 	while (nums[i])
 	{
 		z_line[i] = ft_atoi(nums[i]);
-		ft_printf("%s\n", nums[i]);
+		// ft_printf("%s\n", nums[i]);
 		// ft_printf("%d\n", z_line[i]);
 		free(nums[i]);
 		i++;

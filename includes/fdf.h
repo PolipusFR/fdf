@@ -54,5 +54,6 @@ void    read_file(char *file_name, t_fdf *data);
 void    line_algo(float x, float y, float x1, float y1, t_fdf *data);
 void	draw(t_fdf *data);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
+int get_height(char *file_name);
 
 #endif
