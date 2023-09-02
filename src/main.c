@@ -36,6 +36,8 @@ int		deal_key(int key, t_fdf *data)
 	{
         exit (1);
 	}
+	if (data->zoom < 0)
+		data->zoom = 0;
 	draw(data);
     return (0);
 }

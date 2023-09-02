@@ -6,7 +6,7 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:26:09 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/09/01 19:22:14 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:40:10 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ char	**ft_split(char const *s, char c)
 	int		j;
 
 	str = (char *)s;
+	i = 0;
+	while (str[i])
+		i++;
+	str[i - 1] = '\0';
 	i = 0;
 	j = 0;
 	size = get_size(str, c);
