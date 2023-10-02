@@ -20,7 +20,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
-typedef struct	s_data 
+typedef struct s_data
 {
 	void	*img_ptr;
 	char	*addr;
@@ -40,6 +40,11 @@ typedef struct s_fdf
 	int		move_y;
 	int		move_z;
 
+	float	x;
+	float	y;
+	float	x1;
+	float	y1;
+
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -50,10 +55,16 @@ typedef struct s_fdf
 	void	*win_ptr;
 }	t_fdf;
 
-void    read_file(char *file_name, t_fdf *data);
-void    line_algo(float x, float y, float x1, float y1, t_fdf *data);
+void	fill_matrix(int *z_line, char *line, int width);
+void	read_file(char *file_name, t_fdf *data);
+void	line_algo(t_fdf *data);
 void	draw(t_fdf *data);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
-int get_height(char *file_name);
+int		get_height(char *file_name);
+void	malloc_z_matrix(t_fdf *data);
+void	fill_z_matrix(t_fdf *data, int fd);
+void	data_setup_line_algo(t_fdf *data, int x, int y, int variation);
+void	line_algo_setup(t_fdf *data);
+void	perspective(float *x, float *y, int z);
 
 #endif

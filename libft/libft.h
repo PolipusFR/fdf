@@ -15,6 +15,8 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
 
 # define LIBFT_H
 
@@ -69,8 +71,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 ////////////////	GNL		////////////////////
-# include <stdio.h>
-# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -84,6 +84,6 @@ void	buffer_reset(char *buf);
 int		gnl_strlen(const char *s);
 int		gnl_strlen_buff(char *str);
 char	*gnl_strdup(const char *s1);
-char 	*get_next_line(int fd);
+char	*get_next_line(int fd);
 
 #endif

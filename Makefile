@@ -6,7 +6,7 @@
 #    By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 19:21:06 by lsabatie          #+#    #+#              #
-#    Updated: 2023/09/03 01:37:26 by lsabatie         ###   ########.fr        #
+#    Updated: 2023/10/02 20:43:54 by lsabatie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,8 @@ SRCS        :=      libft/ft_atoi.c \
                           src/main.c \
                           src/read_file.c \
                           src/draw.c \
+                          src/read_file_utils.c \
+                          src/draw_utils.c \
                           
 OBJS        := $(SRCS:.c=.o)
 

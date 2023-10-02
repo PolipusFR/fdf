@@ -6,7 +6,7 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:26:09 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/09/03 00:40:10 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/10/02 20:58:33 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,19 @@ static char	*get_next_string(int *needle, char *str, char c)
 	return (res);
 }
 
+char	**res_alloc(int size)
+{
+	char	**res;
+
+	res = malloc(size * sizeof(char *));
+	if (!res)
+	{
+		free(res);
+		return (NULL);
+	}
+	return (res);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	*str;
@@ -88,12 +101,9 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	j = 0;
 	size = get_size(str, c);
-	res = malloc(size * sizeof(char *));
+	res = res_alloc(size);
 	if (!res)
-	{
-		free(res);
 		return (NULL);
-	}
 	while (i < size - 1)
 	{
 		res[i++] = get_next_string(&j, str, c);
