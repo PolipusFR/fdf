@@ -62,6 +62,14 @@ static void	print_error(void)
 	exit(1);
 }
 
+int	destroy(t_fdf *data)
+{
+	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	exit(0);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_fdf	*data;
@@ -84,6 +92,7 @@ int	main(int ac, char **av)
 	data->move_z = 1;
 	draw(data);
 	mlx_key_hook(data->win_ptr, deal_key, data);
+	mlx_hook(data->win_ptr, 33, 1l << 17 , destroy, data);
 	mlx_loop(data->mlx_ptr);
 	while (i < data->height)
 		free(data->z_matrix[i++]);
