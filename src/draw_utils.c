@@ -6,7 +6,7 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 20:40:35 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/10/02 21:02:56 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:45:50 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	data_setup_line_algo(t_fdf *data, int x, int y, int variation)
 		data->y1 = y;
 		line_algo(data);
 	}
-	if (variation == 2)
+	else
 	{
 		data->x = x;
 		data->x1 = x;

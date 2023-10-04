@@ -6,7 +6,7 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 12:18:18 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/10/02 21:03:29 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:04:54 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void	draw(t_fdf *data)
 	int	x;
 	int	y;
 
-	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	data->buff_img_ptr = data->img_ptr;
 	data->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	y = 0;
 	while (y < data->height)
@@ -77,5 +76,6 @@ void	draw(t_fdf *data)
 		}
 		y++;
 	}
+	mlx_destroy_image(data->mlx_ptr, data->buff_img_ptr);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }

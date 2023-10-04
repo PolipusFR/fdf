@@ -53,6 +53,7 @@ typedef struct s_fdf
 	void	*img_ptr;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*buff_img_ptr;
 }	t_fdf;
 
 void	fill_matrix(int *z_line, char *line, int width);
@@ -60,11 +61,12 @@ void	read_file(char *file_name, t_fdf *data);
 void	line_algo(t_fdf *data);
 void	draw(t_fdf *data);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
-int		get_height(char *file_name);
+int		get_height(char *file_name, t_fdf *data);
 void	malloc_z_matrix(t_fdf *data);
 void	fill_z_matrix(t_fdf *data, int fd);
 void	data_setup_line_algo(t_fdf *data, int x, int y, int variation);
 void	line_algo_setup(t_fdf *data);
 void	perspective(float *x, float *y, int z);
+void	ft_clear_and_exit(int code, t_fdf *data);
 
 #endif

@@ -14,6 +14,23 @@
 #include "../libft/libft.h"
 #include "../libft/ft_printf/ft_printf.h"
 
+void	ft_clear_and_exit(int code, t_fdf *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->img_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	while (i < data->height)
+		free(data->z_matrix[i++]);
+	free(data->z_matrix);
+	if (data)
+		free(data);
+	exit(code);
+}
+
 int	deal_key(int key, t_fdf *data)
 {
 	if (key == 65362)
@@ -33,9 +50,7 @@ int	deal_key(int key, t_fdf *data)
 	if (key == 107)
 		data->move_z += 1;
 	if (key == 65307)
-	{
-		exit (0);
-	}
+		ft_clear_and_exit(0, data);
 	if (data->zoom < 0)
 		data->zoom = 0;
 	draw(data);
@@ -58,7 +73,7 @@ void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color)
 
 static void	print_error(void)
 {
-	printf("Error. Usage : ./fdf map\n");
+	ft_printf("Error. Usage : ./fdf map\n");
 	exit(1);
 }
 
@@ -66,14 +81,13 @@ int	destroy(t_fdf *data)
 {
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	exit(0);
+	ft_clear_and_exit(0, data);
 	return (0);
 }
 
 int	main(int ac, char **av)
 {
 	t_fdf	*data;
-	int		i;
 
 	if (ac != 2)
 		print_error();
@@ -84,6 +98,7 @@ int	main(int ac, char **av)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, av[1]);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->buff_img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel,
 			&data->line_length, &data->endian);
 	data->zoom = 20;
@@ -94,7 +109,4 @@ int	main(int ac, char **av)
 	mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_hook(data->win_ptr, 33, 1l << 17 , destroy, data);
 	mlx_loop(data->mlx_ptr);
-	while (i < data->height)
-		free(data->z_matrix[i++]);
-	free(data->z_matrix);
 }

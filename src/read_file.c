@@ -23,7 +23,7 @@ int	ft_wdcounter(char const *str, char c)
 	{
 		while (str[i] == c && str[i] != '\0')
 			i++;
-		if (str[i])
+		if (str[i] && str[i] != '\n')
 			words++;
 		while (str[i] != c && str[i] != '\0')
 			i++;
@@ -31,7 +31,7 @@ int	ft_wdcounter(char const *str, char c)
 	return (words);
 }
 
-int	get_height(char *file_name)
+int	get_height(char *file_name, t_fdf *data)
 {
 	int		fd;
 	int		height;
@@ -40,7 +40,7 @@ int	get_height(char *file_name)
 	height = 0;
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
-		exit(1);
+		ft_clear_and_exit(1, data);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -56,7 +56,7 @@ int	get_height(char *file_name)
 	return (height);
 }
 
-int	get_width(char *file_name)
+int	get_width(char *file_name, t_fdf *data)
 {
 	char	*line;
 	int		fd;
@@ -65,12 +65,12 @@ int	get_width(char *file_name)
 	width = 0;
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
-		exit(1);
+		ft_clear_and_exit(1, data);
 	line = get_next_line(fd);
 	width = ft_wdcounter(line, ' ');
 	free(line);
 	close (fd);
-	return (width);
+	return (width - 1);
 }
 
 void	fill_matrix(int *z_line, char *line, int width)
@@ -99,8 +99,8 @@ void	read_file(char *file_name, t_fdf *data)
 	int		fd;
 	int		i;
 
-	data->height = get_height(file_name);
-	data->width = get_width(file_name);
+	data->height = get_height(file_name, data);
+	data->width = get_width(file_name, data);
 	data->z_matrix = malloc(sizeof(int *) * (data->height + 1));
 	if (data->z_matrix == NULL)
 		return ;
@@ -115,7 +115,7 @@ void	read_file(char *file_name, t_fdf *data)
 			i--;
 		}
 		free(data->z_matrix);
-		exit(1);
+		ft_clear_and_exit(1, data);
 	}
 	fill_z_matrix(data, fd);
 	close(fd);
