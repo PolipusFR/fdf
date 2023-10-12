@@ -71,16 +71,34 @@ void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color)
 	}
 }
 
-static void	print_error(void)
+static void	check_error (int ac, char **av)
 {
-	ft_printf("Error. Usage : ./fdf map\n");
-	exit(1);
+	char	**split;
+	int		i;
+
+	i = 0;
+	if (ac != 2)
+	{
+		ft_printf("Error. Usage : ./fdf map.fdf\n");
+		exit (1);
+	}
+	split = ft_split(av[1], '.');
+	ft_printf("%s\n", split[1]);
+	if (!split[1] || ft_strcmp(split[1], "fdf") != 0)
+	{
+		ft_printf("Error. Infile must be .fdf file\n");
+		while(split[i])
+		{
+			free(split[i]);
+			i++;
+		}
+		free(split);
+		exit (1);
+	}
 }
 
 int	destroy(t_fdf *data)
 {
-	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	ft_clear_and_exit(0, data);
 	return (0);
 }
@@ -89,8 +107,7 @@ int	main(int ac, char **av)
 {
 	t_fdf	*data;
 
-	if (ac != 2)
-		print_error();
+	check_error(ac, av);
 	data = malloc(sizeof(t_fdf));
 	if (!data)
 		return (0);

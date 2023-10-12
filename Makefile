@@ -6,7 +6,7 @@
 #    By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 19:21:06 by lsabatie          #+#    #+#              #
-#    Updated: 2023/10/02 20:43:54 by lsabatie         ###   ########.fr        #
+#    Updated: 2023/10/12 22:24:15 by lsabatie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRCS        :=      libft/ft_atoi.c \
                           libft/ft_strlcpy.c \
                           libft/ft_strlen.c \
                           libft/ft_strmapi.c \
+                          libft/ft_strcmp.c\
                           libft/ft_strncmp.c \
                           libft/ft_strnstr.c \
                           libft/ft_strrchr.c \
