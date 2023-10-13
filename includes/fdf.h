@@ -6,7 +6,7 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 15:06:10 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/10/13 15:32:54 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:21:01 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_fdf
 	int		move_x;
 	int		move_y;
 	int		move_z;
+	char	**map;
 
 	float	x;
 	float	y;

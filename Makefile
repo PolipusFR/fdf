@@ -6,13 +6,13 @@
 #    By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 19:21:06 by lsabatie          #+#    #+#              #
-#    Updated: 2023/10/13 16:16:45 by lsabatie         ###   ########.fr        #
+#    Updated: 2023/10/13 19:04:22 by lsabatie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME     := fdf
 CC       := gcc
-FLAGS    := -Wall -Wextra -Werror -O3
+FLAGS    := -Wall -Wextra -Werror -g3
 HEADER   := includes/fdf.h
 
 SRCS        :=      utils/ft_atoi.c \
