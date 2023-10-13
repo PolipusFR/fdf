@@ -19,6 +19,16 @@ void	ft_clear_and_exit(int code, t_fdf *data)
 	int	i;
 
 	i = 0;
+	if (code == 2)
+	{
+		ft_printf("Error. File not found");
+		exit(1);
+	}
+	if (code == 3)
+	{
+		ft_printf("Error. Parsing error");
+		exit(1);
+	}
 	if (data->img_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	if (data->win_ptr)
@@ -28,7 +38,7 @@ void	ft_clear_and_exit(int code, t_fdf *data)
 	free(data->z_matrix);
 	if (data)
 		free(data);
-	exit(code);
+	exit(0);
 }
 
 int	deal_key(int key, t_fdf *data)
@@ -83,7 +93,6 @@ static void	check_error (int ac, char **av)
 		exit (1);
 	}
 	split = ft_split(av[1], '.');
-	ft_printf("%s\n", split[1]);
 	if (!split[1] || ft_strcmp(split[1], "fdf") != 0)
 	{
 		ft_printf("Error. Infile must be .fdf file\n");
@@ -95,6 +104,12 @@ static void	check_error (int ac, char **av)
 		free(split);
 		exit (1);
 	}
+	while(split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 int	destroy(t_fdf *data)
