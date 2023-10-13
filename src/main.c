@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include "../libft/libft.h"
-#include "../libft/ft_printf/ft_printf.h"
 
 void	ft_clear_and_exit(int code, t_fdf *data)
 {
@@ -21,12 +19,13 @@ void	ft_clear_and_exit(int code, t_fdf *data)
 	i = 0;
 	if (code == 2)
 	{
-		ft_printf("Error. File not found");
+		free(data);
+		ft_printf("Error. File not found\n");
 		exit(1);
 	}
 	if (code == 3)
 	{
-		ft_printf("Error. Parsing error");
+		ft_printf("Error. Parsing error\n");
 		exit(1);
 	}
 	if (data->img_ptr)
@@ -36,6 +35,7 @@ void	ft_clear_and_exit(int code, t_fdf *data)
 	while (i < data->height)
 		free(data->z_matrix[i++]);
 	free(data->z_matrix);
+	free(data->mlx_ptr);
 	if (data)
 		free(data);
 	exit(0);
@@ -81,37 +81,6 @@ void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color)
 	}
 }
 
-static void	check_error (int ac, char **av)
-{
-	char	**split;
-	int		i;
-
-	i = 0;
-	if (ac != 2)
-	{
-		ft_printf("Error. Usage : ./fdf map.fdf\n");
-		exit (1);
-	}
-	split = ft_split(av[1], '.');
-	if (!split[1] || ft_strcmp(split[1], "fdf") != 0)
-	{
-		ft_printf("Error. Infile must be .fdf file\n");
-		while(split[i])
-		{
-			free(split[i]);
-			i++;
-		}
-		free(split);
-		exit (1);
-	}
-	while(split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-}
-
 int	destroy(t_fdf *data)
 {
 	ft_clear_and_exit(0, data);
@@ -130,7 +99,6 @@ int	main(int ac, char **av)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, av[1]);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->buff_img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel,
 			&data->line_length, &data->endian);
 	data->zoom = 20;
@@ -139,6 +107,6 @@ int	main(int ac, char **av)
 	data->move_z = 1;
 	draw(data);
 	mlx_key_hook(data->win_ptr, deal_key, data);
-	mlx_hook(data->win_ptr, 33, 1l << 17 , destroy, data);
+	mlx_hook(data->win_ptr, 33, 1l << 17, destroy, data);
 	mlx_loop(data->mlx_ptr);
 }

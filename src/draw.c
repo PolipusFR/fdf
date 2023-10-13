@@ -6,12 +6,11 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 12:18:18 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/10/04 18:04:54 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:33:25 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include "../libft/libft.h"
 
 static float	abs_val(float a)
 {

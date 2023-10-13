@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include "../libft/ft_printf/ft_printf.h"
 
 int	ft_wdcounter(char const *str, char c)
 {
