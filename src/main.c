@@ -80,8 +80,6 @@ int	main(int ac, char **av)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, av[1]);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->addr = mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel,
-			&data->line_length, &data->endian);
 	data->zoom = 20;
 	data->move_x = 0;
 	data->move_y = 0;
