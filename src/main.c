@@ -23,11 +23,6 @@ void	ft_clear_and_exit(int code, t_fdf *data)
 		ft_printf("Error. File not found\n");
 		exit(1);
 	}
-	if (code == 3)
-	{
-		ft_printf("Error. Parsing error\n");
-		exit(1);
-	}
 	if (data->img_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	if (data->win_ptr)
@@ -65,20 +60,6 @@ int	deal_key(int key, t_fdf *data)
 		data->zoom = 0;
 	draw(data);
 	return (0);
-}
-
-void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color)
-{
-	char	*dst;
-
-	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
-	{
-		data->addr = mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel,
-				&data->line_length, &data->endian);
-		dst = data->addr + (y * data->line_length + x
-				* (data->bits_per_pixel / 8));
-		*(unsigned int *)dst = color;
-	}
 }
 
 int	destroy(t_fdf *data)

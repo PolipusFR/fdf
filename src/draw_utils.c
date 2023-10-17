@@ -6,7 +6,7 @@
 /*   By: lsabatie <lsabatie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 20:40:35 by lsabatie          #+#    #+#             */
-/*   Updated: 2023/10/04 17:45:50 by lsabatie         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:43:10 by lsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,18 @@ void	line_algo_setup(t_fdf *data)
 	data->x1 += data->move_x;
 	data->y += data->move_y;
 	data->y1 += data->move_y;
+}
+
+void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
+	{
+		data->addr = mlx_get_data_addr(data->img_ptr, &data->bits_per_pixel,
+				&data->line_length, &data->endian);
+		dst = data->addr + (y * data->line_length + x
+				* (data->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
 }
