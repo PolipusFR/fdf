@@ -27,6 +27,7 @@ void	ft_clear_and_exit(int code, t_fdf *data)
 		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_display(data->mlx_ptr);
 	while (i < data->height)
 		free(data->z_matrix[i++]);
 	free(data->z_matrix);
